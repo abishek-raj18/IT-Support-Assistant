@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Support Helpdesk Chatbot</title>
+  <meta name="description" content="An AI-powered IT Support Helpdesk Chatbot that helps employees troubleshoot Network, Hardware, and Software issues instantly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <div class="app-container">
+    <!-- Background decoration -->
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+    
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__header">
+        <button class="new-chat-btn" id="new-chat-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          New Chat
+        </button>
+      </div>
+      
+      <div class="sidebar__history">
+        <div class="history-group" id="history-group">
+          <span class="history-label">Recent</span>
+          <div class="history-item active" data-session-id="0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>IT Support Assistant</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar__footer">
+        <div class="user-profile">
+          <div class="user-avatar">JD</div>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-plan">Free Plan</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="main-content">
+        <header class="chat-header">
+          <div class="header-left">
+            <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <div class="chat-header__info">
+              <h1 class="chat-header__title">IT Support Assistant</h1>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn" id="download-chat-btn" aria-label="Download Chat" title="Download Chat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Chat Messages Area -->
+        <div class="chat-messages-container" id="chat-messages-container">
+          <main class="chat-messages" id="chat-messages">
+            <!-- Messages rendered by JS -->
+          </main>
+        </div>
+
+        <!-- Input Area Wrapper -->
+        <div class="input-wrapper">
+          <!-- Quick Suggestions -->
+          <div class="chat-suggestions" id="chat-suggestions">
+            <button class="suggestion-chip" data-query="My WiFi is not working">🌐 WiFi Issue</button>
+            <button class="suggestion-chip" data-query="My keyboard is not responding">⌨️ Keyboard Issue</button>
+            <button class="suggestion-chip" data-query="Application keeps crashing">💥 App Crash</button>
+          </div>
+
+          <!-- Input Area -->
+          <form class="chat-input-area" id="chat-form">
+            <div class="input-container">
+              <button type="button" class="icon-btn mic-btn" id="micBtn" aria-label="Voice Input" title="Voice Input">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="22"></line>
+                </svg>
+              </button>
+              <input
+                type="text"
+                class="chat-input"
+                id="chat-input"
+                placeholder="Message IT Support..."
+                autocomplete="off"
+              />
+              <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Firebase SDK loaded via firebase-config.js (ES module) -->
+  <script type="module" src="firebase-config.js"></script>
+  <script src="chatbot-logic.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

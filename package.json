@@ -1,0 +1,16 @@
+{
+  "name": "it-chatbot",
+  "version": "1.0.0",
+  "main": "chatbot-logic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}
