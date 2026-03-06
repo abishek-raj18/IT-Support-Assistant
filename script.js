@@ -394,28 +394,32 @@
         }
     });
 
+    function startNewChat() {
+        if (historyGroup.querySelector('.history-item.active')) {
+            saveCurrentSession();
+        }
+
+        sessionCounter = "session_" + Date.now();
+        const newId = sessionCounter;
+        chatMessages.innerHTML = '';
+        chatHistory.length = 0;
+        if (suggestions) suggestions.style.display = 'flex';
+        showGreeting();
+
+        // Save the initial greeting for this new session
+        sessionStore[newId] = { html: chatMessages.innerHTML, title: 'New Chat', hasMessages: false };
+
+        // Deactivate all items
+        historyGroup.querySelectorAll('.history-item').forEach(el => el.classList.remove('active'));
+
+        // Insert new session at the top of recents
+        addToRecents('New Chat', newId);
+    }
+
     // New Chat
     if (newChatBtn) {
         newChatBtn.addEventListener('click', () => {
-            // Save current session snapshot
-            saveCurrentSession();
-
-            // Start new session
-            sessionCounter = "session_" + Date.now();
-            const newId = sessionCounter;
-            chatMessages.innerHTML = '';
-            chatHistory.length = 0;
-            if (suggestions) suggestions.style.display = 'flex';
-            showGreeting();
-
-            // Save the initial greeting for this new session
-            sessionStore[newId] = { html: chatMessages.innerHTML, title: 'New Chat', hasMessages: false };
-
-            // Deactivate all items
-            historyGroup.querySelectorAll('.history-item').forEach(el => el.classList.remove('active'));
-
-            // Insert new session at the top of recents
-            addToRecents('New Chat', newId);
+            startNewChat();
 
             // Close sidebar on mobile
             if (window.innerWidth <= 768) {
@@ -531,7 +535,6 @@
                 sessions.forEach((s, idx) => {
                     const item = document.createElement('div');
                     item.className = 'history-item';
-                    if (idx === 0) item.classList.add('active');
                     item.dataset.sessionId = s.id;
                     item.innerHTML = `
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -542,14 +545,13 @@
                     historyGroup.appendChild(item);
                 });
 
-                // Load newest session messages
-                switchToSession(sessions[0].id);
+                startNewChat();
             } else {
-                showGreeting();
+                startNewChat();
             }
         });
     } else {
-        showGreeting();
+        startNewChat();
     }
     chatInput.focus();
 
